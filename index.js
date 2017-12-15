@@ -51,7 +51,7 @@ bot.on('privmsg', function(event) {
         }
         break;
       case 'mode':
-        var mode_match = cmd_match[2].match(/^(\#[a-zA-Z0-9\@\_]+) ([+-][opsitnml]+)(?: (.+))?$/)
+        var mode_match = cmd_match[2].match(/(\#\S+) ([+-][opsitnmlbvkw]+)(?: (.+))?$/)
         if (mode_match) {
           var channel = mode_match[1]
           var ops = mode_match[2]
@@ -81,11 +81,22 @@ bot.on('privmsg', function(event) {
         bot.quit()
         break;
       case 'kick':
-        var kick_params = cmd_match[2].match(/^(\#\S+) (\S+)/)
+        var kick_params = cmd_match[2].match(/(\#\S+) (\S+)/)
         if (kick_params) {
           var channel = kick_params[1]
           var who = kick_params[2]
           bot.raw(`KICK ${channel} ${who}`)
+          event.reply(`Kicking ${who} from ${channel}`)
+        }
+        break;
+      case 'kickban':
+        var kick_params = cmd_match[2].match(/(\#\S+) (\S+)/)
+        if (kick_params) {
+          var channel = kick_params[1]
+          var who = kick_params[2]
+          bot.raw(`KICK ${channel} ${who}`)
+          bot.raw(`MODE ${channel} +b ${who}`)
+          event.reply(`Kicking ${who} from ${channel}`)
         }
         break;
       case 'topic':
