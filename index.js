@@ -1,5 +1,6 @@
 var IRC = require('irc-framework')
 var axios = require('axios')
+var idUsers = require('./identifiedUsers')
 
 var bot = new IRC.Client();
 bot.connect({
@@ -23,98 +24,47 @@ bot.on('nick', function(event) {
 })
 
 bot.on('message', function(event) {
-  console.log(`${event.target}: ${event.message}`)
+  console.log(`${event.nick} -> ${event.target}: ${event.message}`)
+  if (event.nick === 'NickServ') {
+    var msgMatch = event.message.match(/^(.+) ACC (\d+)$/)
+    if (msgMatch) {
+      if (msgMatch[2] === '3') {
+        console.log(true)
+        idUsers.identifyUser(msgMatch[1], true)
+      } else {
+        console.log(false, msgMatch[2])
+        idUsers.identifyUser(msgMatch[1], false)
+      }
+    }
+    return;
+  }
 })
 
+const CMD_MATCH_USER_INTERVAL=5000
+
+function onCmdMatch(event, cmdMatch) {
+  idUsers.isUserAvailable(event.nick, bot, (isAvailable) => {
+    if (isAvailable) {
+      idUsers.isUserIdentified(event.nick, bot, (isId) => {
+          if(isId) {
+            matchCommand(cmdMatch, event)
+          }
+      })
+    } else {
+      onCmdMatch(event, cmdMatch)
+    }
+  })
+}
+
 bot.on('privmsg', function(event) {
-  if (event.target.match(/^\#/)) {
+  let chance = Math.floor(Math.random() * 10)
+  if (chance > 2 && event.target.match(/^\#/)) {
     return
   }
-  var cmd_match = event.message.match(/^!([a-zA-Z0-9\_]+)(?: (.+))?$/)
+  var cmdMatch = event.message.match(/^!([a-zA-Z0-9\_]+)(?: (.+))?$/)
 
-  if (cmd_match) {
-    switch(cmd_match[1]) {
-      case 'say':
-        var say_match = cmd_match[2].match(/^(\#?[a-zA-Z0-9\_\@]+) (.+)$/)
-        if (say_match) {
-          var target = say_match[1]
-          var msg = say_match[2]
-          bot.say(target, msg)
-        }
-        break;
-      case 'action':
-        var action_match = cmd_match[2].match(/^(\#?[a-zA-Z0-9\_\@]+) (.+)$/)
-        if (action_match) {
-          var target = action_match[1]
-          var action = action_match[2]
-          bot.action(target, action)
-        }
-        break;
-      case 'mode':
-        var mode_match = cmd_match[2].match(/(\#\S+) ([+-][opsitnmlbvkw]+)(?: (.+))?$/)
-        if (mode_match) {
-          var channel = mode_match[1]
-          var ops = mode_match[2]
-          var nick = (mode_match[3]) ? mode_match[3] : null
-
-          if (nick) {
-            bot.raw(`MODE ${channel} ${ops} ${nick}`)
-          } else {
-            bot.raw(`MODE ${channel} ${ops}`)
-          }
-          event.reply('Setting mode for channel ' + channel + ' with ' + ops + ' for ' + nick)
-        }
-        break;
-      case 'join':
-        var to_join = cmd_match[2]
-      	event.reply('Joining ' + to_join + '..');
-      	bot.join(to_join);
-        break;
-      case 'part':
-      case 'leave':
-        var to_leave = cmd_match[2]
-        event.reply('Leaving ' + to_leave + '..')
-        bot.part(to_leave)
-        break;
-      case 'quit':
-        event.reply('Quitting')
-        bot.quit()
-        break;
-      case 'kick':
-        var kick_params = cmd_match[2].match(/(\#\S+) (\S+)/)
-        if (kick_params) {
-          var channel = kick_params[1]
-          var who = kick_params[2]
-          bot.raw(`KICK ${channel} ${who}`)
-          event.reply(`Kicking ${who} from ${channel}`)
-        }
-        break;
-      case 'kickban':
-        var kick_params = cmd_match[2].match(/(\#\S+) (\S+)/)
-        if (kick_params) {
-          var channel = kick_params[1]
-          var who = kick_params[2]
-          bot.raw(`KICK ${channel} ${who}`)
-          bot.raw(`MODE ${channel} +b ${who}`)
-          event.reply(`Kicking ${who} from ${channel}`)
-        }
-        break;
-      case 'topic':
-        var topic_params = cmd_match[2].match(/^(\#\S+) (.+)$/)
-        if (topic_params) {
-          var channel = topic_params[1]
-          var topic = topic_params[2]
-          bot.setTopic(channel, topic)
-        }
-        break;
-      case 'nick':
-        var nick_param = cmd_match[2].match(/^\s*(.+)\s*$/)
-        if (nick_param) {
-          event.reply(`Changing nick to ${nick_param[1]}`)
-          bot.changeNick(nick_param[1])
-        }
-        break;
-    }
+  if (cmdMatch) {
+    setTimeout(() => onCmdMatch(event, cmdMatch), CMD_MATCH_USER_INTERVAL)
   } else {
     axios.post('http://localhost:2000/', {
       text: event.message
@@ -130,3 +80,88 @@ bot.on('privmsg', function(event) {
     })
   }
 });
+
+function matchCommand(cmdMatch, event) {
+  switch(cmdMatch[1]) {
+    case 'say':
+      var sayParams = cmdMatch[2].match(/^(\#?[a-zA-Z0-9\_\@]+) (.+)$/)
+      if (sayParams) {
+        var target = sayParams[1]
+        var msg = sayParams[2]
+        bot.say(target, msg)
+      }
+      break;
+    case 'action':
+      var actionParams = cmdMatch[2].match(/^(\#?[a-zA-Z0-9\_\@]+) (.+)$/)
+      if (actionParams) {
+        var target = actionParams[1]
+        var action = actionParams[2]
+        bot.action(target, action)
+      }
+      break;
+    case 'mode':
+      var modeParams = cmdMatch[2].match(/(\#\S+) ([+-][opsitnmlbvkw]+)(?: (.+))?$/)
+      if (modeParams) {
+        var channel = modeParams[1]
+        var ops = modeParams[2]
+        var nick = (modeParams[3]) ? modeParams[3] : null
+
+        if (nick) {
+          bot.raw(`MODE ${channel} ${ops} ${nick}`)
+        } else {
+          bot.raw(`MODE ${channel} ${ops}`)
+        }
+        event.reply('Setting mode for channel ' + channel + ' with ' + ops + ' for ' + nick)
+      }
+      break;
+    case 'join':
+      var toJoin = cmdMatch[2]
+      event.reply('Joining ' + toJoin + '..');
+      bot.join(toJoin);
+      break;
+    case 'part':
+    case 'leave':
+      var toLeave = cmdMatch[2]
+      event.reply('Leaving ' + toLeave + '..')
+      bot.part(toLeave)
+      break;
+    case 'quit':
+      event.reply('Quitting')
+      bot.quit()
+      break;
+    case 'kick':
+      var kickParams = cmdMatch[2].match(/(\#\S+) (\S+)/)
+      if (kickParams) {
+        var channel = kickParams[1]
+        var who = kickParams[2]
+        bot.raw(`KICK ${channel} ${who}`)
+        event.reply(`Kicking ${who} from ${channel}`)
+      }
+      break;
+    case 'kickban':
+      var kickParams = cmdMatch[2].match(/(\#\S+) (\S+)/)
+      if (kickParams) {
+        var channel = kickParams[1]
+        var who = kickParams[2]
+        bot.raw(`KICK ${channel} ${who}`)
+        bot.raw(`MODE ${channel} +b ${who}`)
+        event.reply(`Kicking ${who} from ${channel}`)
+      }
+      break;
+    case 'topic':
+      var topicParams = cmdMatch[2].match(/^(\#\S+) (.+)$/)
+      if (topicParams) {
+        var channel = topicParams[1]
+        var topic = topicParams[2]
+        bot.setTopic(channel, topic)
+      }
+      break;
+    case 'nick':
+      var nickParam = cmdMatch[2].match(/^\s*(.+)\s*$/)
+      if (nickParam) {
+        event.reply(`Changing nick to ${nickParam[1]}`)
+        bot.changeNick(nickParam[1])
+      }
+      break;
+  }
+}

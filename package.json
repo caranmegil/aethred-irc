@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",
-    "irc-framework": "^2.10.2"
+    "irc-framework": "^2.10.2",
+    "moment": "^2.19.4",
+    "node-async-locks": "^1.0.1"
   }
 }
