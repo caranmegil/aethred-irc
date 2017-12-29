@@ -40,22 +40,6 @@ bot.on('message', function(event) {
   }
 })
 
-const CMD_MATCH_USER_INTERVAL=5000
-
-function onCmdMatch(event, cmdMatch) {
-  idUsers.isUserAvailable(event.nick, bot, (isAvailable) => {
-    if (isAvailable) {
-      idUsers.isUserIdentified(event.nick, bot, (isId) => {
-          if(isId) {
-            matchCommand(cmdMatch, event)
-          }
-      })
-    } else {
-      onCmdMatch(event, cmdMatch)
-    }
-  })
-}
-
 bot.on('privmsg', function(event) {
   let chance = Math.floor(Math.random() * 10)
   if (chance > 2 && event.target.match(/^\#/)) {
@@ -64,24 +48,36 @@ bot.on('privmsg', function(event) {
   var cmdMatch = event.message.match(/^!([a-zA-Z0-9\_]+)(?: (.+))?$/)
 
   if (cmdMatch) {
-    setTimeout(() => onCmdMatch(event, cmdMatch), CMD_MATCH_USER_INTERVAL)
-  } else {
-    axios.post('http://localhost:2000/', {
-      text: event.message
-    }).then(resp => {
-      var response = resp.data.response
-      if(response && response.length > 0) {
-        response.forEach(text => {
-          event.reply(text)
+    axios
+      .get(`http://localhost:3000/IRC/${event.nick}`)
+      .then((response) => {
+        var permissions = response.data.results.filter( (permission) => {
+          return permission === 'master'// || permission === 'commander'
         })
-      }
-    }).catch(err => {
 
-    })
+        if (permissions.length > 0) {
+          matchCommand(cmdMatch, event, response.data.results)
+        }
+      })
+      .catch((err) => console.log(err))
+  } else {
+    axios
+      .post('http://localhost:2000/', {
+        text: event.message
+      })
+      .then(resp => {
+        var response = resp.data.response
+        if(response && response.length > 0) {
+          response.forEach(text => {
+            event.reply(text)
+          })
+        }
+      })
+      .catch(err => console.log(err))
   }
 });
 
-function matchCommand(cmdMatch, event) {
+function matchCommand(cmdMatch, event, permissions) {
   switch(cmdMatch[1]) {
     case 'say':
       var sayParams = cmdMatch[2].match(/^(\#?[a-zA-Z0-9\_\@]+) (.+)$/)
