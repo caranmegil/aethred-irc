@@ -4,7 +4,7 @@ var idUsers = require('./identifiedUsers')
 
 var bot = new IRC.Client();
 bot.connect({
-  host: 'irc.freenode.net',
+  host: 'irc.nerderium.com',
   port: 6667,
   nick: 'aethred',
   username: 'aethred',
@@ -49,7 +49,7 @@ bot.on('privmsg', function(event) {
 
   if (cmdMatch) {
     axios
-      .get(`http://localhost:3000/IRC/${event.nick}`)
+      .get(`http://localhost:8301/IRC/${event.nick}`)
       .then((response) => {
         var permissions = response.data.results.filter( (permission) => {
           return permission === 'master'// || permission === 'commander'
