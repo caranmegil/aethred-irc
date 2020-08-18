@@ -2,13 +2,15 @@ var IRC = require('irc-framework')
 var axios = require('axios')
 var idUsers = require('./identifiedUsers')
 
+var botName = process.env.NAME || 'aethred'
+
 var bot = new IRC.Client();
 bot.connect({
-  host: 'irc.nerderium.com',
-  port: 6667,
-  nick: 'aethred',
-  username: 'aethred',
-  gecos: 'aethred',
+  host: process.env.HOST,
+  port: process.env.PORT,
+  nick: botName,
+  username: botName,
+  gecos: botName,
 });
 
 bot.on('registered', function(event) {
@@ -22,6 +24,38 @@ bot.on('connected', function(event) {
 bot.on('nick', function(event) {
   console.log(event)
 })
+
+function accessPersonality(text, cb) {
+    axios
+      .post('http://localhost:2000/', {
+        text: text 
+      })
+      .then(resp => {
+        var response = resp.data.response
+        if(response && response.length > 0) {
+          response.forEach(text => {
+            cb(text)
+          })
+        }
+      })
+      .catch(err => console.log(err))
+}
+
+function checkPermission(nick, perm, cb) {
+    axios
+      .get(`http://localhost:3000/IRC/${nick}`)
+      .then((response) => {
+        var permissions = response.data.results.filter( (permission) => {
+          return perm.filter( perm => perm === permission ).length > 0
+          // return permission === perm// || permission === 'commander'
+        })
+
+        if (permissions.length > 0) {
+          cb()
+        }
+      })
+      .catch((err) => console.log(err))
+}
 
 bot.on('message', function(event) {
   console.log(`${event.nick} -> ${event.target}: ${event.message}`)
@@ -37,7 +71,14 @@ bot.on('message', function(event) {
       }
     }
     return;
+  } else if (event.message.startsWith(`${botName}:`)) {
+    checkPermission(event.nick, ['master', 'commander'], () => {
+      accessPersonality(event.message, (text) => {
+        event.reply(text)
+      }) 
+    })
   }
+  
 })
 
 bot.on('privmsg', function(event) {
@@ -49,7 +90,7 @@ bot.on('privmsg', function(event) {
 
   if (cmdMatch) {
     axios
-      .get(`http://localhost:8301/IRC/${event.nick}`)
+      .get(`http://localhost:3000/IRC/${event.nick}`)
       .then((response) => {
         var permissions = response.data.results.filter( (permission) => {
           return permission === 'master'// || permission === 'commander'

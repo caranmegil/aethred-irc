@@ -1,0 +1,223 @@
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** No Ident response
+irc.nerderium.com -> *: *** Couldn't look up your hostname
+aethred registered
+aethred connected
+caranmegil -> aethred: !join #botlandia
+Error: Parse Error: Expected HTTP/
+    at Socket.socketOnData (_http_client.js:469:22)
+    at Socket.emit (events.js:315:20)
+    at addChunk (_stream_readable.js:295:12)
+    at readableAddChunk (_stream_readable.js:271:9)
+    at Socket.Readable.push (_stream_readable.js:212:10)
+    at TCP.onStreamRead (internal/stream_base_commons.js:186:23) {
+  bytesParsed: 1,
+  code: 'HPE_INVALID_CONSTANT',
+  reason: 'Expected HTTP/',
+  rawPacket: <Buffer 0a 00 00 00 70 01 23 5c 52 44 12 5f 62 20 a0 f1 6b 54 78 d3 13 6a d0 9e 50 a3 74 48 e5 bc 62 ed 62 33 4c df a4 9e 49 2c f6 05 43 3e bc 1f 96 ec 33 ad ... 67 more bytes>,
+  config: {
+    adapter: [Function: httpAdapter],
+    transformRequest: { '0': [Function: transformRequest] },
+    transformResponse: { '0': [Function: transformResponse] },
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    validateStatus: [Function: validateStatus],
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'User-Agent': 'axios/0.17.1'
+    },
+    method: 'get',
+    url: 'http://localhost:8301/IRC/caranmegil',
+    data: undefined
+  },
+  request: Writable {
+    _writableState: WritableState {
+      objectMode: false,
+      highWaterMark: 16384,
+      finalCalled: false,
+      needDrain: false,
+      ending: false,
+      ended: false,
+      finished: false,
+      destroyed: false,
+      decodeStrings: true,
+      defaultEncoding: 'utf8',
+      length: 0,
+      writing: false,
+      corked: 0,
+      sync: true,
+      bufferProcessing: false,
+      onwrite: [Function: bound onwrite],
+      writecb: null,
+      writelen: 0,
+      afterWriteTickInfo: null,
+      bufferedRequest: null,
+      lastBufferedRequest: null,
+      pendingcb: 0,
+      prefinished: false,
+      errorEmitted: false,
+      emitClose: true,
+      autoDestroy: false,
+      bufferedRequestCount: 0,
+      corkedRequestsFree: [Object]
+    },
+    writable: true,
+    _events: [Object: null prototype] {
+      response: [Function: handleResponse],
+      error: [Function: handleRequestError]
+    },
+    _eventsCount: 2,
+    _maxListeners: undefined,
+    _options: {
+      maxRedirects: 21,
+      maxBodyLength: 10485760,
+      protocol: 'http:',
+      hostname: 'localhost',
+      port: '8301',
+      path: '/IRC/caranmegil',
+      method: 'get',
+      headers: [Object],
+      agent: undefined,
+      auth: undefined,
+      nativeProtocols: [Object],
+      pathname: '/IRC/caranmegil'
+    },
+    _ended: true,
+    _ending: true,
+    _redirectCount: 0,
+    _redirects: [],
+    _requestBodyLength: 0,
+    _requestBodyBuffers: [],
+    _onNativeResponse: [Function],
+    _currentRequest: ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      _last: true,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      useChunkedEncodingByDefault: false,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      _contentLength: 0,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      socket: [Socket],
+      connection: [Socket],
+      _header: 'GET /IRC/caranmegil HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'User-Agent: axios/0.17.1\r\n' +
+        'Host: localhost:8301\r\n' +
+        'Connection: close\r\n' +
+        '\r\n',
+      _onPendingData: [Function: noopPendingOutput],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'GET',
+      insecureHTTPParser: undefined,
+      path: '/IRC/caranmegil',
+      _ended: false,
+      res: null,
+      aborted: false,
+      timeoutCb: null,
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      _redirectable: [Circular],
+      [Symbol(kCapture)]: false,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kOutHeaders)]: [Object: null prototype]
+    },
+    _currentUrl: 'http://localhost:8301/IRC/caranmegil',
+    [Symbol(kCapture)]: false
+  },
+  response: undefined
+}
+Killed
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** No Ident response
+irc.nerderium.com -> *: *** Couldn't look up your hostname
+aethred registered
+aethred connected
+caranmegil -> aethred: !join #botlandia
+caranmegil -> aethred: !join #lobby
+irc.nerderium.com -> aethred: Server Terminating: received signal SIGTERM
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** No Ident response
+irc.nerderium.com -> *: *** Couldn't look up your hostname
+aethred registered
+aethred connected
+Killed
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** No Ident response
+irc.nerderium.com -> *: *** Couldn't look up your hostname
+aethred registered
+aethred connected
+caranmegil -> aethred: !join #lobby
+caranmegil -> aethred: !join #botlandia
+Killed
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** No Ident response
+irc.nerderium.com -> *: *** Couldn't look up your hostname
+aethred registered
+aethred connected
+caranmegil -> aethred: !join #botlandia
+caranmegil -> aethred: !join #lobby
+Killed
+./start.sh: 2: ./start.sh: rium.com: not found
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** Found your hostname
+irc.nerderium.com -> *: *** Got Ident response
+irc.nerderium.com -> aethred: *** Spoofing your IP
+irc.nerderium.com -> aethred: *** You are exempt from K/D lines
+irc.nerderium.com -> aethred: *** You are exempt from X lines
+irc.nerderium.com -> aethred: *** You are exempt from resvs
+irc.nerderium.com -> aethred: *** You are exempt from user limits
+irc.nerderium.com -> aethred: *** You are exempt from flood protection
+aethred registered
+aethred connected
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** Got Ident response
+irc.nerderium.com -> *: *** Found your hostname
+caranmegil -> aethred: !join #botlandia
+caranmegil -> aethred: !join #lobby
+caranmegil -> aethred: test
+caranmegil -> aethred: hello
+caranmegil -> aethred: what the hell
+caranmegil -> aethred: what the hell
+caranmegil -> aethred: what the hell
+caranmegil -> aethred: what the hell
+caranmegil -> aethred: what the hell
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> #botlandia: aethred: pity
+Killed
