@@ -221,3 +221,123 @@ caranmegil -> aethred: pity
 caranmegil -> aethred: pity
 caranmegil -> #botlandia: aethred: pity
 Killed
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** Found your hostname
+irc.nerderium.com -> *: *** Got Ident response
+irc.nerderium.com -> aethred: *** Spoofing your IP
+irc.nerderium.com -> aethred: *** You are exempt from K/D lines
+irc.nerderium.com -> aethred: *** You are exempt from X lines
+irc.nerderium.com -> aethred: *** You are exempt from resvs
+irc.nerderium.com -> aethred: *** You are exempt from user limits
+irc.nerderium.com -> aethred: *** You are exempt from flood protection
+aethred registered
+aethred connected
+caranmegil -> aethred: !join #lobby
+caranmegil -> aethred: !join #botlandia
+ares -> #lobby: hello
+ares -> #lobby: hmmm, it's not showing my users bar
+ares -> #lobby: using irssi
+caranmegil -> #lobby: interesting choice of name
+ares -> #lobby: hi aethred!
+ares -> #lobby: how are you today?
+caranmegil -> #lobby: so that's broken.  he is supposed to only respond if his name is said at the beginning
+caranmegil -> #lobby: aethred: burp
+ares -> #lobby: oh
+ares -> #lobby: his personality sounds like it comes from Ash quotes :D
+caranmegil -> #lobby: aethred: pity
+caranmegil -> #lobby: that too
+ares -> #lobby: aethred: joker
+caranmegil -> #lobby: he used to do context switching.  like i'd build personalities that would be triggered based on chat messages
+ares -> #lobby: aethred: easter
+ares -> #lobby: aethred: christmas
+caranmegil -> #lobby: aethred: splork
+caranmegil -> #lobby: aethred: splork
+caranmegil -> #lobby: aethred: splork
+caranmegil -> #lobby: and that is the brokenness of the random sentence generator.  it's because i preload but the node will send a response before the preload is finished
+ares -> #lobby: yeah this is the nick I used to run with, that and war_god
+ares -> #lobby: bryan's was cybmage
+caranmegil -> #lobby: couldn't remember all of them.  i knew ares was in the mix
+ares -> #lobby: not sure if it'd be cool or creepy to have a bot with his nick saying things he would say xD
+caranmegil -> #lobby: man, that'd make me sad
+caranmegil -> #lobby: exactly, aethred.  exactly
+ares -> #lobby: aye
+caranmegil -> #lobby: the good news is that i could build different personalities quite easily.  maybe i'll do one that is called communist_bot which will spout random phrases from the communist manifesto
+_ares_ -> #lobby: lol
+_ares_ -> #lobby: random mao quotes
+caranmegil -> #lobby: and mix in "chenese proverb" which are just product slogans made to sound philosophical
+caranmegil -> #lobby: one such example is "one is not fully clean unless they are zestfully clean."
+caranmegil -> #lobby: ah.  i found out some piece that i coded and forgot about.  it also explains why the bot randomly sometimes responds.  it has a .2 probability of responding to channel messages
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: pity
+caranmegil -> aethred: splork
+caranmegil -> aethred: !mode #lobby o caranmegil
+caranmegil -> aethred: !mode #lobby +o caranmegil
+caranmegil -> aethred: !mode #botlandia +o _ares_
+caranmegil -> aethred: !mode #lobby -o caranmegil
+ares -> #lobby: lol that's pretty cool, I'm guessing he was a little too chatty at some point :D
+ares -> #lobby: at black hat this year there was a talk about 18 ways to spoof emails, which included those super safe certificate signed emails...we have a business unit trying to strong arm a dev team into writing some code which performs action again emails received and they keep trying to push it through architecture review for approval without having to discuss the concerns around what stupid ass crap they're trying to
+ares -> #lobby: pull
+caranmegil -> #lobby: yes the bot was in yahoo! chat speaking just about every sentence annoying people to no end.  i remember i built a system for this guy to remotely shutdown his computer from his blackberry
+caranmegil -> #lobby: yeah, it was fancy pants, aethred.  but anyhow he wanted a cert
+caranmegil -> #lobby: in the e-mail and wanted all kinds of things.  i said an app was better but he didn't want an app
+caranmegil -> aethred: !topic #botlandia bleep blurp
+caranmegil -> aethred: blah
+caranmegil -> aethred: blah
+caranmegil -> aethred: blah
+caranmegil -> aethred: blah
+caranmegil -> aethred: !mode #botlandia +o caranmegil
+caranmegil -> aethred: !mode #lobby +o caranmegil
+Killed
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** Got Ident response
+irc.nerderium.com -> *: *** Found your hostname
+irc.nerderium.com -> aethred: *** Spoofing your IP
+irc.nerderium.com -> aethred: *** You are exempt from K/D lines
+irc.nerderium.com -> aethred: *** You are exempt from X lines
+irc.nerderium.com -> aethred: *** You are exempt from resvs
+irc.nerderium.com -> aethred: *** You are exempt from user limits
+irc.nerderium.com -> aethred: *** You are exempt from flood protection
+aethred registered
+aethred connected
+caranmegil -> aethred: test
+TypeError [ERR_INVALID_ARG_TYPE]: The "url" argument must be of type string. Received undefined
+    at validateString (internal/validators.js:120:11)
+    at Url.parse (url.js:159:3)
+    at Object.urlParse [as parse] (url.js:154:13)
+    at dispatchHttpRequest (/home/pi/aethred/node_modules/axios/lib/adapters/http.js:57:22)
+    at new Promise (<anonymous>)
+    at httpAdapter (/home/pi/aethred/node_modules/axios/lib/adapters/http.js:18:10)
+    at dispatchRequest (/home/pi/aethred/node_modules/axios/lib/core/dispatchRequest.js:59:10)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+Killed
+irc.nerderium.com -> *: *** Looking up your hostname
+irc.nerderium.com -> *: *** Checking Ident
+irc.nerderium.com -> *: *** Got Ident response
+irc.nerderium.com -> *: *** Found your hostname
+irc.nerderium.com -> aethred: *** Spoofing your IP
+irc.nerderium.com -> aethred: *** You are exempt from K/D lines
+irc.nerderium.com -> aethred: *** You are exempt from X lines
+irc.nerderium.com -> aethred: *** You are exempt from resvs
+irc.nerderium.com -> aethred: *** You are exempt from user limits
+irc.nerderium.com -> aethred: *** You are exempt from flood protection
+aethred registered
+aethred connected
+caranmegil -> aethred: test
+TypeError [ERR_INVALID_ARG_TYPE]: The "url" argument must be of type string. Received undefined
+    at validateString (internal/validators.js:120:11)
+    at Url.parse (url.js:159:3)
+    at Object.urlParse [as parse] (url.js:154:13)
+    at dispatchHttpRequest (/home/pi/aethred/node_modules/axios/lib/adapters/http.js:57:22)
+    at new Promise (<anonymous>)
+    at httpAdapter (/home/pi/aethred/node_modules/axios/lib/adapters/http.js:18:10)
+    at dispatchRequest (/home/pi/aethred/node_modules/axios/lib/core/dispatchRequest.js:59:10)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+Killed

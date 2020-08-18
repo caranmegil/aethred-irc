@@ -27,7 +27,7 @@ bot.on('nick', function(event) {
 
 function accessPersonality(text, cb) {
     axios
-      .post('http://localhost:2000/', {
+      .post(process.env.LINGUA_HOST, {
         text: text 
       })
       .then(resp => {
@@ -43,7 +43,7 @@ function accessPersonality(text, cb) {
 
 function checkPermission(nick, perm, cb) {
     axios
-      .get(`http://localhost:3000/IRC/${nick}`)
+      .get(`${process.env.PERMISSIONS_HOST}/IRC/${nick}`)
       .then((response) => {
         var permissions = response.data.results.filter( (permission) => {
           return perm.filter( perm => perm === permission ).length > 0
@@ -90,7 +90,7 @@ bot.on('privmsg', function(event) {
 
   if (cmdMatch) {
     axios
-      .get(`http://localhost:3000/IRC/${event.nick}`)
+      .get(`${process.env.PERMISSIONS_HOST}/IRC/${event.nick}`)
       .then((response) => {
         var permissions = response.data.results.filter( (permission) => {
           return permission === 'master'// || permission === 'commander'
@@ -103,7 +103,7 @@ bot.on('privmsg', function(event) {
       .catch((err) => console.log(err))
   } else {
     axios
-      .post('http://localhost:2000/', {
+      .post(process.env.LINGUA_HOST, {
         text: event.message
       })
       .then(resp => {
