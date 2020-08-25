@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "aethred-irc",
+      "script": "/home/pi/aethred/index.js",
+      "instances": 1,
+      "exec_mode": "cluster",
+      "env": {
+        "HOST": "irc.freenode.net",
+        "PORT": "6667",
+        "PERMISSIONS_HOST": "http://localhost:3000",
+        "LINGUA_HOST": "http://localhost:2000/",
+      }
+    }
+  ]
+}

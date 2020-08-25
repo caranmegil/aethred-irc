@@ -11,6 +11,8 @@ bot.connect({
   nick: botName,
   username: botName,
   gecos: botName,
+  ping_interval: 30,
+  ping_timeout: 120,
 });
 
 bot.on('registered', function(event) {
